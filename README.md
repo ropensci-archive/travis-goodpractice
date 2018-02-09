@@ -30,8 +30,8 @@ To deploy the output of `goodpractice` on Travis, you can use something like tha
 after_success:
   - Rscript -e 'Sys.setenv(NOT_CRAN = "true"); x = goodpractice::gp(); z = capture.output(x);
     pkg = x$package[[1]]; pkgver = x$description$get_version(); dt = gsub(":|-", "_",
-    format(Sys.time(), format="%y-%h-%d_%T")); cat(z, file = sprintf("ropensci_check_%s_%s_%s.txt",
-    pkg, pkgver, dt), sep = "\\n");  goodpractice::export_json(x, sprintf("ropensci_check_%s_%s_%s.json",
+    format(Sys.time(), format="%y-%h-%d_%T")); cat(z, file = sprintf("%s_%s_%s.txt",
+    pkg, pkgver, dt), sep = "\\n");  goodpractice::export_json(x, sprintf("%s_%s_%s.json",
     pkg, pkgver, dt)); x'
 ```
 
