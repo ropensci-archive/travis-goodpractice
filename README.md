@@ -24,7 +24,7 @@ after_success:
 
 ## Deploy example
 
-To deploy the output of `goodpractice` on Travis, you can use something like that in See [.simple-travis.yml](.deploy-travis.yml), where we change the `after-success` declaration to:
+To deploy the output of `goodpractice` on Travis, you can use something like that in See [.deploy-travis.yml](.deploy-travis.yml), where we change the `after-success` declaration to:
 
 ```
 after_success:
