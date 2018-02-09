@@ -1,0 +1,10 @@
+language: r
+sudo: false
+cache: packages
+dist: trusty
+
+r_github_packages:
+  - MangoTheCat/goodpractice
+
+after_success:
+  - Rscript -e 'Sys.setenv(NOT_CRAN = "true"); goodpractice::gp()'

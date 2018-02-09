@@ -1,0 +1,25 @@
+language: r
+sudo: false
+cache: packages
+dist: trusty
+
+r_github_packages:
+  - MangoTheCat/goodpractice
+
+after_success:
+  - Rscript -e 'Sys.setenv(NOT_CRAN = "true"); x = goodpractice::gp(); z = capture.output(x);
+    pkg = x$package[[1]]; pkgver = x$description$get_version(); dt = gsub(":|-", "_",
+    format(Sys.time(), format="%y-%h-%d_%T")); cat(z, file = sprintf("%s_%s_%s.txt",
+    pkg, pkgver, dt), sep = "\\n");  goodpractice::export_json(x, sprintf("%s_%s_%s.json",
+    pkg, pkgver, dt)); x'
+
+addons:
+  artifacts:
+    s3_region: us-west-2
+    paths:
+    - $(git ls-files -o | grep -e '.txt' -e '.json' | tr "\n" ":")
+
+env:
+  global:
+  - secure: <your secure key 1>
+  - secure: <your secure key 2>
